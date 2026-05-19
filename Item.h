@@ -40,8 +40,8 @@ using namespace std;
 
 struct Item {
 	string name;
-	int price;
-	int count;
+	int price= 0;
+	int count=0;
 
 	void PrintInfo() const {
 		cout << name << "(" << price << "G)" << "x" << count << endl;

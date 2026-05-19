@@ -2,8 +2,8 @@
 #include<iostream>
 #include<string>
 #include <vector>
-#include <thread> // sleep_for를 사용하기 위해 필요
-#include <chrono> // 시간 단위를 위해 필요
+#include <thread> 
+#include <chrono> 
 #include <algorithm>
 #include <limits> 
 #include <map>
@@ -25,4 +25,6 @@
 #include "Goblin.h"
 #include "AlchemyWorkshop.h"
 #include "Dungen.h"
+
+using namespace std;
 

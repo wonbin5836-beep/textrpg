@@ -33,9 +33,6 @@
     <ClCompile Include="Thief.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ork.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="slim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="boss.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ork.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

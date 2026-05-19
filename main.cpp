@@ -1,13 +1,81 @@
 #include "common.h"
 
-using namespace std;
 
 void printStatusUpgrade(Player* player) {
 	cout << "================================================" << endl;
 	cout << "< 캐릭터 강화 >    강화 포인트 : " << player->getStat()<< endl;
 	cout << "1. HP UP    2. MP UP    3. 공격력 UP" << endl;
-	cout << "4. 방어력 UP    5. 현재 능력치    0. 게임시작" << endl;
+	cout << "4. 방어력 UP    5. 현재 능력치    0. 돌아가기" << endl;
 	cout << "================================================" << endl;
+
+	bool isGameStart = false;
+	int choice_up;
+	while (!isGameStart) {
+		cout << "번호를 선택해주세요:";
+		cin >> choice_up;
+		if (cin.fail()) {
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "잘못된 입력입니다. 다시 입력해주세요.";
+			continue;
+		}
+		switch (choice_up)
+		{
+		case 1:
+			if (player->getStat() <= 0) {
+				cout << "강화 포인트가 부족합니다." << endl;
+				break;
+			}
+			else {
+				player->setStat(player->getStat() - 1);
+				player->setMaxHp(player->getMaxHp() + 20);
+				player->setHp(player->getHp() + 20);
+				cout << "HP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				break;
+			}
+		case 2:
+			if (player->getStat() <= 0) {
+				cout << "강화 포인트가 부족합니다." << endl;
+				break;
+			}
+			else {
+				player->setStat(player->getStat() - 1);
+				player->setMaxMp(player->getMaxMp() + 20);
+				player->setMp(player->getMp() + 20);
+				cout << "MP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				break;
+			}
+		case 3:
+			if (player->getStat() <= 0) {
+				cout << "강화 포인트가 부족합니다." << endl;
+				break;
+			}
+			else {
+				player->setStat(player->getStat() - 1);
+				player->setAtk(player->getAtk() + 5);
+				cout << "공격력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				break;
+			}
+		case 4:
+			if (player->getStat() <= 0) {
+				cout << "강화 포인트가 부족합니다." << endl;
+				break;
+			}
+			else {
+				player->setStat(player->getStat() - 1);
+				player->setDef(player->getDef() + 5);
+				cout << "방어력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				break;
+			}
+		case 5:
+			player->printPlayerStatus();
+			break;
+		case 0:
+			cout << endl;
+			cout << "돌아가기" << endl;
+			isGameStart = true;
+		}
+	}
 }
 
 void printMainMenu(Dungen& dungen, Inventory<Item>& inventory, AlchemyWorkshop& workshop, Player* player) {
@@ -19,7 +87,7 @@ void printMainMenu(Dungen& dungen, Inventory<Item>& inventory, AlchemyWorkshop& 
 		cout << " 1. 던전 입장" << endl;
 		cout << " 2. 인벤토리 확인" << endl;
 		cout << " 3. 포션 제작소" << endl;
-		cout << " 4. 스테이터스" << endl;
+		cout << " 4. 능력치 강화" << endl;
 		cout << " 0. 게임 종료" << endl;
 		cout << "================" << endl;
 		int choice;
@@ -42,7 +110,7 @@ void printMainMenu(Dungen& dungen, Inventory<Item>& inventory, AlchemyWorkshop& 
 				workshop.printPotionShop(inventory);
 				break;
 		case 4:
-				player->printPlayerStatus();
+				printStatusUpgrade(player);
 				break;
 		case 0:
 				cout << "게임을 종료합니다." << endl;
@@ -64,8 +132,8 @@ int main()
 	AlchemyWorkshop workshop;
 	Dungen dungen;
 	int studs[SIZE] = { 0 }; // HP, MP, atk, def 순서로 저장
-	int HPPotion = 5;
-	int MPPotion = 5;
+	int HPPotion = 0;
+	int MPPotion = 0;
 
 
 	cout << "================================================" << endl;
@@ -114,91 +182,14 @@ int main()
 	player->printPlayerStatus();
 	cout << endl;
 	cout << "* HP 포션 5개, MP 포션 5개가 기본 지급되었습니다." << endl;
-	inventory.AddItem({ "HP포션", 6, HPPotion });
-	inventory.AddItem({ "1포션", 1, HPPotion });
-	inventory.AddItem({ "2포션", 2, HPPotion });
-	inventory.AddItem({ "3포션", 3, HPPotion });
-	inventory.AddItem({ "4포션", 4, HPPotion });
-	inventory.AddItem({ "5포션", 5, HPPotion });
-	inventory.AddItem({ "6포션", 6, HPPotion });
-	inventory.AddItem({ "9포션", 30, HPPotion });
-	inventory.AddItem({ "7포션", 34, HPPotion });
-
-	inventory.AddItem({ "8포션", 10, HPPotion });
-
-	cout << endl;
 	workshop.setPotion(5, &HPPotion, &MPPotion);
+	inventory.AddItem({ "HP포션", 6, HPPotion });
+	inventory.AddItem({ "MP포션", 7, MPPotion });
+	cout << endl;
+	
 	
 	printStatusUpgrade(player);
 
-	bool isGameStart = false;
-	int choice;
-	while (!isGameStart) {
-		cout << "번호를 선택해주세요:";
-		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요.";
-			continue;
-		}
-		switch (choice)
-		{
-		case 1:
-			if(player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
-				break;
-			}
-			else {
-				player->setStat(player->getStat() - 1);
-				player->setMaxHp(player->getMaxHp() + 20);
-				player->setHp(player->getHp() + 20);
-				cout << "HP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: "<< player->getStat() <<")" << endl;
-				break;
-			}
-		case 2:
-			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
-				break;
-			}
-			else {
-				player->setStat(player->getStat() - 1);
-				player->setMaxMp(player->getMaxMp() + 20);
-				player->setMp(player->getMp() + 20);
-				cout << "MP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
-				break;
-			}
-		case 3:
-			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
-				break;
-			}
-			else {
-				player->setStat(player->getStat() - 1);
-				player->setAtk(player->getAtk() + 5);
-				cout << "공격력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
-				break;
-			}
-		case 4:
-			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
-				break;
-			}
-			else {
-				player->setStat(player->getStat() - 1);
-				player->setDef(player->getDef() + 5);
-				cout << "방어력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
-				break;
-			}
-		case 5:
-			player->printPlayerStatus();
-			break;
-		case 0:
-			cout << endl;
-			cout << "게임을 시작합니다!" << endl;
-			isGameStart = true;
-		}
-	}
 	cout << endl;
 	cout << endl;
 	
@@ -212,7 +203,7 @@ int main()
 	int currentAtk = player->getAtk();
 	int currentDef = player->getDef();
 	delete player;
-	
+	int choice;
 	while (!isJobSelect)
 	{
 		cout << "번호를 입력하세요: ";

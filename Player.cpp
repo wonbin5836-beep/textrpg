@@ -30,7 +30,7 @@ void Player::GainExp(Monster* monster) {
 			cout << " -> 레벨 업! Lv." << level << " -> Lv." << level + 1 << endl;
 			level++;
 			Util::wait(150);
-			cout << " -> HP +10, MP +5, 공격력 +5 증가!" << endl;
+			cout << " -> HP +10, MP +5, 공격력 +5 증가! 강화포인트 +4 획득했습니다!" << endl;
 			stat += 4;
 			levelup--;
 	}

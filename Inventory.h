@@ -242,7 +242,7 @@ public:
 	}
 
 	void printInventory() const {
-		cout << "[인벤토리 (" << size_ << " / 10)]" << endl;
+		cout << "[인벤토리 (" << size_ << " / "<< capacity_ << ")]" << endl;
 		for (int i = 0; i < size_; i++) {
 			cout << i + 1 << ". ";
 			pItems_[i].PrintInfo();
@@ -253,7 +253,7 @@ public:
 		if (size_ == 0) {
 			cout << "인벤토리가 텅 비어 있습니다." << endl;
 			return;
-		}// [보안 추가] 인벤토리가 비어있을 때의 예외 처리
+		}
 		int choice;
 		while (true) {
 			cout << "사용할 아이템 번호 (취소 0번): ";

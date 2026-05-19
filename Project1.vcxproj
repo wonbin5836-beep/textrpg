@@ -130,7 +130,7 @@
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Magician.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ork.cpp" />
+    <ClCompile Include="Ork.cpp" />
     <ClCompile Include="Ork.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="AlchemyWorkshop.cpp" />

@@ -4,8 +4,10 @@ using namespace std;
 const vector<PotionRecipe> AlchemyWorkshop::DEFAULT_RECIPE ={
 { "HP포션", "허브", "맑은물" },
 { "MP포션", "마나허브", "맑은물" },
-{ "스태미나포션", "허브", "베리" },
-{ "방어포션", "베리", "허브" }
+{ "스태미나포션", "마나허브", "베리" },
+{ "방어포션", "베리", "허브" },
+{ "공격력포션", "버섯", "허브" },
+{ "하프포션", "버섯", "베리" }
 };
 
 AlchemyWorkshop::AlchemyWorkshop() {
@@ -166,8 +168,8 @@ void AlchemyWorkshop::ShowAllRecipe()
 }
 void AlchemyWorkshop::setPotion(int count, int* p_HPPotion, int* p_MPPotion)
 {
-    *p_HPPotion += count;
-    *p_MPPotion += count;
+    *p_HPPotion = count;
+    *p_MPPotion = count;
 }
 //포인터를 쓰지 않고 매개변수만 넘겼을 때 값이 바뀌지 않는 이유를 설명하기
 //함수에 변수를 인자로 받게되면 함수내 지역 변수로만 계산 되어 함수가 종료되자마자 사라져버림 

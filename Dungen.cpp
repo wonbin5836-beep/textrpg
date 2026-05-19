@@ -31,7 +31,9 @@ void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
 	cout << endl;
 	int count_dungen = 0;
 	for(Monster* monster : *route){
-		if (monster->getHp() <= 0) continue;
+		if (monster->getHp() <= 0) {
+			continue;
+		}
 		cout << "탐색중" << endl;
 		Util::slowPrint(".", 200);
 		Util::slowPrint(".", 200);
@@ -39,7 +41,15 @@ void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
 		Util::slowPrint(".", 200);
 		Util::slowPrint("!", 100);
 		cout << endl;
-		Util::slowPrint("몬스터가 나타났다!", 30);
+		if (count_dungen == 3) {
+			cout << "★ 보스방 개방!" << endl;
+			Util::wait(500);
+			Util::slowPrint("보스가 나타났다!", 50);
+			Util::wait(500);
+		}
+		else {
+			Util::slowPrint("몬스터가 나타났다!", 30);
+		}
 		bool isVictory = fightMonster(player, monster, inventory);
 		count_dungen++;
 		if (!isVictory) {
@@ -59,10 +69,13 @@ void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
 			cout << "던전 탐험을 계속합니다..." << endl;
 			Util::waitForKey();
 		}
-		else { cout << "보스 몬스터 격파!" << endl; }
+		else { 
+			cout << "보스 몬스터 격파!" << endl; 
+		}
 
 	}
-	cout << "던전 클리어!" << endl;
+	Util::slowPrint("던전 클리어!", 50);
+	Util::wait(500);
 	for (Monster* m : a_route) {
 		m->ResetHP();
 	}
@@ -135,6 +148,7 @@ bool Dungen::fightMonster(Player* player, Monster* monster, Inventory<Item>& inv
 		cout << endl;
 		return true;
 	}
+	return false;
 }
 
 //#include "common.h"
