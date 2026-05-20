@@ -1,19 +1,18 @@
-#ifndef GOBLIN_H_
-#define GOBLIN_H_
+#pragma once
 #include "common.h"
+#include "Monster.h"
+
+class Player;
 
 class Goblin : public Monster
 {
 private:
 
 public:
-	Goblin(string name, int hp, int mp, int atk, int def) : Monster(name, hp, mp, atk, def) {
+	Goblin(std::string name, int hp, int mp, int atk, int def) : Monster(name, hp, mp, atk, def) {
 		expReward = 75;
 		monsterLoot = { "고블린의 녹슨 검", 20 ,1 };
-		//cout << "* 고블린" << endl;
+		//std::cout << "* 고블린" << endl;
 	}
 	void attack(Player* player) override;
 };
-
-
-#endif

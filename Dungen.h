@@ -1,8 +1,6 @@
 #pragma once
-#include <string>
-#include <iostream>
+#include "common.h"
 
-using namespace std;
 class Player;
 struct Item;
 class Monster;
@@ -11,8 +9,8 @@ class Inventory;
 
 class Dungen {
 public:
-	vector<Monster*> a_route;
-	vector<Monster*> b_route;
+	std::vector<Monster*> a_route;
+	std::vector<Monster*> b_route;
 	Dungen();
 	~Dungen();
 	void enterDungeon(Player* player, Inventory<Item>& inventory);

@@ -1,78 +1,82 @@
 #include "common.h"
-
+#include "Player.h"
+#include "Dungen.h"
+#include "Monster.h"
+#include "AlchemyWorkshop.h"
+#include "P_Player.h"
 
 void printStatusUpgrade(Player* player) {
-	cout << "================================================" << endl;
-	cout << "< 캐릭터 강화 >    강화 포인트 : " << player->getStat()<< endl;
-	cout << "1. HP UP    2. MP UP    3. 공격력 UP" << endl;
-	cout << "4. 방어력 UP    5. 현재 능력치    0. 돌아가기" << endl;
-	cout << "================================================" << endl;
+	std::cout << "================================================" << std::endl;
+	std::cout << "< 캐릭터 강화 >    강화 포인트 : " << player->getStat() << std::endl;
+	std::cout << "1. HP UP    2. MP UP    3. 공격력 UP" << std::endl;
+	std::cout << "4. 방어력 UP    5. 현재 능력치    0. 돌아가기" << std::endl;
+	std::cout << "================================================" << std::endl;
 
 	bool isGameStart = false;
 	int choice_up;
 	while (!isGameStart) {
-		cout << "번호를 선택해주세요:";
-		cin >> choice_up;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요.";
+		std::cout << "번호를 선택해주세요:";
+		std::cin >> choice_up;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요.";
 			continue;
 		}
 		switch (choice_up)
 		{
 		case 1:
 			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
+				std::cout << "강화 포인트가 부족합니다." << std::endl;
 				break;
 			}
 			else {
 				player->setStat(player->getStat() - 1);
 				player->setMaxHp(player->getMaxHp() + 20);
 				player->setHp(player->getHp() + 20);
-				cout << "HP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				std::cout << "HP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << std::endl;
 				break;
 			}
 		case 2:
 			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
+				std::cout << "강화 포인트가 부족합니다." << std::endl;
 				break;
 			}
 			else {
 				player->setStat(player->getStat() - 1);
 				player->setMaxMp(player->getMaxMp() + 20);
 				player->setMp(player->getMp() + 20);
-				cout << "MP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				std::cout << "MP가 20 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << std::endl;
 				break;
 			}
 		case 3:
 			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
+				std::cout << "강화 포인트가 부족합니다." << std::endl;
 				break;
 			}
 			else {
 				player->setStat(player->getStat() - 1);
 				player->setAtk(player->getAtk() + 5);
-				cout << "공격력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				std::cout << "공격력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << std::endl;
 				break;
 			}
 		case 4:
 			if (player->getStat() <= 0) {
-				cout << "강화 포인트가 부족합니다." << endl;
+				std::cout << "강화 포인트가 부족합니다." << std::endl;
 				break;
 			}
 			else {
 				player->setStat(player->getStat() - 1);
 				player->setDef(player->getDef() + 5);
-				cout << "방어력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << endl;
+				std::cout << "방어력이 5 증가하였습니다. (강화 포인트 차감: -1, 남은 포인트: " << player->getStat() << ")" << std::endl;
 				break;
 			}
 		case 5:
 			player->printPlayerStatus();
 			break;
 		case 0:
-			cout << endl;
-			cout << "돌아가기" << endl;
+			std::cout << std::endl;
+			std::cout << "돌아가기" << std::endl;
 			isGameStart = true;
 		}
 	}
@@ -81,22 +85,22 @@ void printStatusUpgrade(Player* player) {
 void printMainMenu(Dungen& dungen, Inventory<Item>& inventory, AlchemyWorkshop& workshop, Player* player) {
 	while (true)
 	{
-		cout << endl;
-		cout << "================" << endl;
-		cout << " < 메인 메뉴 >" << endl;
-		cout << " 1. 던전 입장" << endl;
-		cout << " 2. 인벤토리 확인" << endl;
-		cout << " 3. 포션 제작소" << endl;
-		cout << " 4. 능력치 강화" << endl;
-		cout << " 0. 게임 종료" << endl;
-		cout << "================" << endl;
+		std::cout << std::endl;
+		std::cout << "================" << std::endl;
+		std::cout << " < 메인 메뉴 >" << std::endl;
+		std::cout << " 1. 던전 입장" << std::endl;
+		std::cout << " 2. 인벤토리 확인" <<std:: endl;
+		std::cout << " 3. 포션 제작소" << std::endl;
+		std::cout << " 4. 능력치 강화" << std::endl;
+		std::cout << " 0. 게임 종료" << std::endl;
+		std::cout << "================" << std::endl;
 		int choice;
-		cout << "선택: ";
-		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요: ";
+		std::cout << "선택: ";
+		std::cin >> choice;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요: ";
 			continue;
 		}
 		switch (choice) {
@@ -113,10 +117,10 @@ void printMainMenu(Dungen& dungen, Inventory<Item>& inventory, AlchemyWorkshop& 
 				printStatusUpgrade(player);
 				break;
 		case 0:
-				cout << "게임을 종료합니다." << endl;
+				std::cout << "게임을 종료합니다." << std::endl;
 				exit(0);
 		default:
-			cout << "잘못된 선택입니다. 다시 입력해주세요." << endl;
+			std::cout << "잘못된 선택입니다. 다시 입력해주세요." << std::endl;
 			continue;
 		}
 	}
@@ -127,77 +131,77 @@ int main()
 {
 	const int inventory_size = 10;
 	const int SIZE = 4;
-	string name; 
+	std::string name;
 	Inventory<Item> inventory(inventory_size);
 	AlchemyWorkshop workshop;
 	Dungen dungen;
 	int studs[SIZE] = { 0 }; // HP, MP, atk, def 순서로 저장
 	int HPPotion = 0;
 	int MPPotion = 0;
+	std::cout << "";
 
-
-	cout << "================================================" << endl;
-	cout << "              [던전 탈출 텍스트 RPG]" << endl;
-	cout << "================================================" << endl;
-	cout << "주인공의 이름을 입력하세요:" << name;
-	cin >> name;
-	cout << endl;
+	std::cout << "================================================" << std::endl;
+	std::cout << "              [던전 탈출 텍스트 RPG]" << std::endl;
+	std::cout << "================================================" << std::endl;
+	std::cout << "주인공의 이름을 입력하세요:" << name;
+	std::cin >> name;
+	std::cout << std::endl;
 	while (true)
 	{
-		cout << "현재 HP와 MP를 설정해주세요(max 100 50):";
-		cin >> studs[0] >> studs[1];
-		if(cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요." << endl;
+		std::cout << "현재 HP와 MP를 설정해주세요(max 100 50):";
+		std::cin >> studs[0] >> studs[1];
+		if(std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요." << std::endl;
 			continue;
 		}
 		if (studs[0] > 100 || studs[1] > 50)
 		{
-			cout << "HP와 MP는 값이 최댓값 보다 큽니다. 작게 설정해주세요." << endl;
+			std::cout << "HP와 MP는 값이 최댓값 보다 큽니다. 작게 설정해주세요." << std::endl;
 		}
 		else break;
 	} 
 	//hp mp설정
 	while (true)
 	{
-		cout << "현재 공격력과 방어력을 설정해주세요(max 10 10):";
-		cin >> studs[2] >> studs[3];
-		if(cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요." << endl;
+		std::cout << "현재 공격력과 방어력을 설정해주세요(max 10 10):";
+		std::cin >> studs[2] >> studs[3];
+		if(std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요." << std::endl;
 			continue;
 		}
 		if (studs[2] > 10 || studs[3] > 10)
 		{
-			cout << "공격력과 방어력은 값이 최댓값 보다 큽니다. 작게 설정해주세요." << endl;
+			std::cout << "공격력과 방어력은 값이 최댓값 보다 큽니다. 작게 설정해주세요." << std::endl;
 		}
 		else break;
 	} 
 	//atk def 설정
-	cout << endl;
+	std::cout << std::endl;
 	Player* player = nullptr;
 	player = new Novice(name, studs[0], studs[1], studs[2], studs[3]);
 	player->printPlayerStatus();
-	cout << endl;
-	cout << "* HP 포션 5개, MP 포션 5개가 기본 지급되었습니다." << endl;
+	std::cout << std::endl;
+	std::cout << "* HP 포션 5개, MP 포션 5개가 기본 지급되었습니다." << std::endl;
 	workshop.setPotion(5, &HPPotion, &MPPotion);
 	inventory.AddItem({ "HP포션", 6, HPPotion });
 	inventory.AddItem({ "MP포션", 7, MPPotion });
-	cout << endl;
+	std::cout << std::endl;
 	
 	
 	printStatusUpgrade(player);
 
-	cout << endl;
-	cout << endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
 	
-	cout << "< 전직 시스템 >" << endl;
-	cout << name << "님, 직업을 선택해주세요!" << endl;
-	cout << "1. 전사  2. 마법사  3. 도적  4. 궁수" << endl;
+	std::cout << "< 전직 시스템 >" << std::endl;
+	std::cout << name << "님, 직업을 선택해주세요!" << std::endl;
+	std::cout << "1. 전사  2. 마법사  3. 도적  4. 궁수" << std::endl;
 	bool isJobSelect = false;
-	string currentName = player->getName();
+	std::string currentName = player->getName();
 	int currentHp = player->getMaxHp();
 	int currentMp = player->getMaxMp();
 	int currentAtk = player->getAtk();
@@ -206,12 +210,12 @@ int main()
 	int choice;
 	while (!isJobSelect)
 	{
-		cout << "번호를 입력하세요: ";
-		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요." << endl;
+		std::cout << "번호를 입력하세요: ";
+		std::cin >> choice;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요." << std::endl;
 			continue;
 		}
 		switch (choice)
@@ -233,14 +237,14 @@ int main()
 			isJobSelect = true;
 			break;
 		default:
-			cout << "잘못된 입력입니다." << endl;
+			std::cout << "잘못된 입력입니다." << std::endl;
 			break;
 		}
 	}
 	
 	player->printPlayerStatus();
-	cout << endl;
-	cout << endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
 
 	printMainMenu(dungen, inventory, workshop, player);
 	

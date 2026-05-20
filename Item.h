@@ -1,10 +1,5 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include <map>
-#include <memory>
-
-using namespace std;
+#include "common.h"
 
 //enum class ItemType { CONSUMABLE, EQUIPMENT, LOOT};
 //
@@ -39,12 +34,12 @@ using namespace std;
 
 
 struct Item {
-	string name;
+	std::string name;
 	int price= 0;
 	int count=0;
 
 	void PrintInfo() const {
-		cout << name << "(" << price << "G)" << "x" << count << endl;
+		std::cout << name << "(" << price << "G)" << "x" << count << std::endl;
 	}
 	static bool compareByPrice(const Item& a, const Item& b) {
 		return a.price < b.price;

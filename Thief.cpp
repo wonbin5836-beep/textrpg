@@ -1,4 +1,6 @@
 #include "common.h"
+#include "Thief.h"
+#include "Monster.h"
 
 void Thief::attack(Monster* monster) {
 	Util::slowPrint("* [도적] 단검 찌르기을(를) 시전합니다.", 10);

@@ -1,4 +1,6 @@
 #include "common.h"
+#include "Magician.h"
+#include "Monster.h"
 
 void Magician::attack(Monster* monster) {
 	Util::slowPrint("* [마법사] 파이어볼을(를) 시전합니다.", 10);

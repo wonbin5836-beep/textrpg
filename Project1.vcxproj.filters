@@ -33,7 +33,7 @@
     <ClCompile Include="Thief.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="slim.cpp">
+    <ClCompile Include="slime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AlchemyWorkshop.cpp">
@@ -55,6 +55,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ork.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +83,7 @@
     <ClInclude Include="Monster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Slim.h">
+    <ClInclude Include="Slime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AlchemyWorkshop.h">
@@ -105,6 +108,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BOSS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="M_Monsters_.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="P_Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

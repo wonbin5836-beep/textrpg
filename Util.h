@@ -1,10 +1,10 @@
-#ifndef UTIL_H_
-#define UTIL_H_
+#pragma once
 #include <iostream>
 #include <string>
 #include <thread>
 #include <chrono>
 #include <conio.h>
+
 class Util {
 public:
     static void wait(int millis) {
@@ -26,4 +26,3 @@ public:
         (void)_getch();
     }
 };
-#endif

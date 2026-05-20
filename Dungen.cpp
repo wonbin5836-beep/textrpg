@@ -1,9 +1,15 @@
 #include "common.h"
+#include "Dungen.h"
+#include "Monster.h"
+#include "M_Monsters_.h"
+#include "Player.h"
+#include "Inventory.h"
+
 
 const int MAX_INVENTORY = 10;
 Dungen::Dungen() {
 	// A 루트 방 배치
-	a_route.push_back(new Slim("슬라임", 30, 20, 30, 5));
+	a_route.push_back(new Slime("슬라임", 30, 20, 30, 5));
 	a_route.push_back(new Goblin("고블린 대장", 40, 10, 35, 10));
 	a_route.push_back(new Ork("오크", 60, 20, 40, 1));
 	a_route.push_back(new Boss("고블린 왕", 100, 10, 100, 10));
@@ -11,7 +17,7 @@ Dungen::Dungen() {
 	// B 루트 방 배치
 	b_route.push_back(new Goblin("고블린", 50, 30, 35, 7));
 	b_route.push_back(new Ork("오크", 70, 20, 50, 15));
-	b_route.push_back(new Slim("강한 슬라임", 50, 45, 45, 7));
+	b_route.push_back(new Slime("강한 슬라임", 50, 45, 45, 7));
 	b_route.push_back(new Boss("오크 왕", 100, 20, 100, 15));
 }
 Dungen::~Dungen() {
@@ -20,29 +26,29 @@ Dungen::~Dungen() {
 }
 
 void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
-	vector<Monster*>* route = nullptr;
+	std::vector<Monster*>* route = nullptr;
 	if (rand() % 2) {
 		route = &a_route;
 	}
 	else {
 		route = &b_route;
 	}
-	cout << "던전 입장!" << endl;
-	cout << endl;
+	std::cout << "던전 입장!" << std::endl;
+	std::cout << std::endl;
 	int count_dungen = 0;
 	for(Monster* monster : *route){
 		if (monster->getHp() <= 0) {
 			continue;
 		}
-		cout << "탐색중" << endl;
+		std::cout << "탐색중" << std::endl;
 		Util::slowPrint(".", 200);
 		Util::slowPrint(".", 200);
 		Util::slowPrint(".", 200);
 		Util::slowPrint(".", 200);
 		Util::slowPrint("!", 100);
-		cout << endl;
+		std::cout << std::endl;
 		if (count_dungen == 3) {
-			cout << "★ 보스방 개방!" << endl;
+			std::cout << "★ 보스방 개방!" << std::endl;
 			Util::wait(500);
 			Util::slowPrint("보스가 나타났다!", 50);
 			Util::wait(500);
@@ -53,7 +59,7 @@ void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
 		bool isVictory = fightMonster(player, monster, inventory);
 		count_dungen++;
 		if (!isVictory) {
-			cout << "던전 공략 실패... 마을로 돌아갑니다." << endl;
+			std::cout << "던전 공략 실패... 마을로 돌아갑니다." << std::endl;
 			player->setHp(player->getMaxHp());
 			for (Monster* m : a_route) {
 				m->ResetHP();
@@ -64,13 +70,13 @@ void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
 			return;
 		}
 		if (count_dungen < 4) {
-			cout << count_dungen << "번째 몬스터 격파!" << endl;
+			std::cout << count_dungen << "번째 몬스터 격파!" << std::endl;
 			Util::wait(1000);
-			cout << "던전 탐험을 계속합니다..." << endl;
+			std::cout << "던전 탐험을 계속합니다..." << std::endl;
 			Util::waitForKey();
 		}
 		else { 
-			cout << "보스 몬스터 격파!" << endl; 
+			std::cout << "보스 몬스터 격파!" << std::endl;
 		}
 
 	}
@@ -85,23 +91,23 @@ void Dungen::enterDungeon(Player* player, Inventory<Item>& inventory) {
 	Util::waitForKey();
 }
 bool Dungen::fightMonster(Player* player, Monster* monster, Inventory<Item>& inventory) {
-	cout << endl;
-	cout << "[ 전투 시작! ] " << player->getName() << " vs " << monster->getName() << endl;
+	std::cout << std::endl;
+	std::cout << "[ 전투 시작! ] " << player->getName() << " vs " << monster->getName() << std::endl;
 	while (player->getHp() > 0 && monster->getHp() > 0)
 	{
 		Util::wait(300);
-		cout << endl;
-		cout << "<" << player->getName() << ": " << player->getHp() << "/" << player->getMaxHp() << " vs " << monster->getName() << ": " << monster->getHp() << "/" << monster->getMaxHp() << ">" << endl;
-		cout << "--- 플레이어 턴---" << endl;
-		cout << "1. 공격한다  2. 아이템 사용  3. 도망간다" << endl;
-		cout << "선택: ";
+		std::cout << std::endl;
+		std::cout << "<" << player->getName() << ": " << player->getHp() << "/" << player->getMaxHp() << " vs " << monster->getName() << ": " << monster->getHp() << "/" << monster->getMaxHp() << ">" << std::endl;
+		std::cout << "--- 플레이어 턴---" << std::endl;
+		std::cout << "1. 공격한다  2. 아이템 사용  3. 도망간다" << std::endl;
+		std::cout << "선택: ";
 		int choice = 0;
-		cin >> choice;
-		if (cin.fail()) {
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "잘못된 입력입니다. 다시 입력해주세요: ";
-			cout << endl;
+		std::cin >> choice;
+		if (std::cin.fail()) {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요: ";
+			std::cout << std::endl;
 			continue;
 		}
 		switch (choice)
@@ -115,37 +121,37 @@ bool Dungen::fightMonster(Player* player, Monster* monster, Inventory<Item>& inv
 			break;
 		case 2:
 			inventory.printInventory();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			inventory.useItem(player);
 			break;
 		case 3:
-			cout << "도망에 성공했습니다!" << endl;
+			std::cout << "도망에 성공했습니다!" << std::endl;
 			return false;
 		default:
-			cout << "잘못된 입력입니다. 다시 입력해주세요: ";
-			cout << endl;
+			std::cout << "잘못된 입력입니다. 다시 입력해주세요: ";
+			std::cout << std::endl;
 			break;
 		}
 	}
 	if (player->getHp() <= 0) {
-		cout << "플레이어가 패배했습니다." << endl;
+		std::cout << "플레이어가 패배했습니다." << std::endl;
 		return false;
 	}
 	else if (monster->getHp() <= 0) {
-		cout << endl;
+		std::cout << std::endl;
 		Util::slowPrint("몬스터를 처치했습니다.", 10);
-		cout << endl;
+		std::cout << std::endl;
 		Util::wait(30);
-		cout << "★ 전투 승리!" << endl;
+		std::cout << "★ 전투 승리!" << std::endl;
 		player->GainExp(monster);
-		cout << endl;
+		std::cout << std::endl;
 		
 		Util::wait(500);
-		cout << " -> " << monster->monsterLoot.name << " 획득!" << endl;
+		std::cout << " -> " << monster->monsterLoot.name << " 획득!" << std::endl;
 		
 		inventory.AddItem(monster->monsterLoot);
 
-		cout << endl;
+		std::cout << std::endl;
 		return true;
 	}
 	return false;

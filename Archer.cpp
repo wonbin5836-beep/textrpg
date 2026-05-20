@@ -1,4 +1,6 @@
 #include "common.h"
+#include "Archer.h"
+#include "Monster.h"
 
 void Archer::attack(Monster* monster) {
 	Util::slowPrint("* [궁수] 차징 샷을(를) 시전합니다.", 10);

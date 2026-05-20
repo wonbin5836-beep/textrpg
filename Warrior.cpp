@@ -1,5 +1,6 @@
 #include "common.h"
-
+#include "Warrior.h"
+#include "Monster.h"
 
 void Warrior::attack(Monster* monster) {
 	Util::slowPrint("* [전사] 베기를 시전합니다.", 10);

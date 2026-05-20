@@ -127,6 +127,7 @@
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="Dungen.cpp" />
     <ClCompile Include="goblin.cpp" />
+    <ClCompile Include="Intro.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Magician.cpp" />
     <ClCompile Include="main.cpp" />
@@ -134,7 +135,7 @@
     <ClCompile Include="Ork.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="AlchemyWorkshop.cpp" />
-    <ClCompile Include="slim.cpp" />
+    <ClCompile Include="slime.cpp" />
     <ClCompile Include="Thief.cpp" />
     <ClCompile Include="Warrior.cpp" />
   </ItemGroup>
@@ -145,13 +146,16 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="Dungen.h" />
     <ClInclude Include="Goblin.h" />
+    <ClInclude Include="Intro.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Magician.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="M_Monsters_.h" />
     <ClInclude Include="Novice.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Slim.h" />
+    <ClInclude Include="P_Player.h" />
+    <ClInclude Include="Slime.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Warrior.h" />

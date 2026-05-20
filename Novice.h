@@ -1,21 +1,19 @@
-#ifndef NOVICE_H_
-#define NOVICE_H_
+#pragma once
+#include "common.h"
 #include "Player.h"
-#include <string>
-#include <iostream>
-#include "Monster.h"
+class Monster;
+
 class Novice : public Player
 {
 private:
 
 public:
-	Novice(string name, int maxHp, int maxMp, int atk, int def) : Player(name, maxHp, maxMp, atk, def) {
+	Novice(std::string name, int maxHp, int maxMp, int atk, int def) : Player(name, maxHp, maxMp, atk, def) {
 		this->job = "Novice";
 	}
 
 	void attack(Monster* monster) override {
-		cout << "직업이 없습니다." << endl;
+		std::cout << "직업이 없습니다." << std::endl;
 
 	}
 };
-#endif
